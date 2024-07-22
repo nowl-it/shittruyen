@@ -81,7 +81,7 @@ jobs:
               if: matrix.platform == 'ubuntu-22.04' || matrix.platform == 'macos-latest'
               run: echo "NO_STRIP=true" >> $GITHUB_ENV
 
-            - uses: tauri-apps/tauri-action@v0
+            - uses: tauri-apps/tauri-action@dev
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
                   NO_STRIP: true
