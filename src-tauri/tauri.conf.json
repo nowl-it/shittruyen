@@ -1,6 +1,6 @@
 {
 	"productName": "shittruyen",
-	"version": "0.1.0",
+	"version": "0.0.1",
 	"identifier": "com.nowl.dev",
 	"build": {
 		"frontendDist": "../dist",
