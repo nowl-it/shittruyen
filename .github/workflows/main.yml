@@ -106,4 +106,4 @@ jobs:
                   token: ${{ secrets.GITHUB_TOKEN }}
                   tag_name: ${{ needs.setup.outputs.tag_name  }}
                   files: |
-                      ${{ needs.setup.outputs.name_bin }}/${{ needs.setup.outputs.arch_pkg_name }
+                      ${{ needs.setup.outputs.name_bin }}/${{ needs.setup.outputs.arch_pkg_name }}
