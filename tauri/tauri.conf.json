@@ -1,57 +1,37 @@
 {
-	"build": {
-		"beforeDevCommand": "pnpm run dev",
-		"beforeBuildCommand": "pnpm run build",
-		"devPath": "http://localhost:1420",
-		"distDir": "../dist",
-		"withGlobalTauri": false
-	},
-	"package": {
-		"productName": "Cứt Truyện",
-		"version": "0.0.0"
-	},
-	"tauri": {
-		"allowlist": {
-			"window": {
-				"all": true
-			},
-			"fs": {
-				"all": true
-			},
-			"path": {
-				"all": true
-			},
-			"all": true,
-			"shell": {
-				"all": false,
-				"open": true
-			}
-		},
-		"bundle": {
-			"active": true,
-			"icon": [
-				"icons/32x32.png",
-				"icons/128x128.png",
-				"icons/128x128@2x.png",
-				"icons/icon.icns",
-				"icons/icon.ico"
-			],
-			"identifier": "com.nowl.dev",
-			"targets": "all"
-		},
-		"security": {
-			"csp": null
-		},
-		"updater": {
-			"active": false
-		},
-		"windows": [
-			{
-				"resizable": true,
-				"title": "Cứt Truyện",
-				"width": 800,
-				"height": 600
-			}
-		]
-	}
+  "productName": "shittruyen",
+  "version": "0.1.0",
+  "identifier": "com.tauri.dev",
+  "build": {
+    "frontendDist": "../dist",
+    "devUrl": "http://localhost:3000",
+    "beforeDevCommand": "pnpm run dev",
+    "beforeBuildCommand": "pnpm run build"
+  },
+  "app": {
+    "windows": [
+      {
+        "title": "shittruyen",
+        "width": 800,
+        "height": 600,
+        "resizable": true,
+        "fullscreen": false
+      }
+    ],
+    "security": {
+      "csp": null
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": "all",
+    "icon": [
+      "icons/32x32.png",
+      "icons/128x128.png",
+      "icons/128x128@2x.png",
+      "icons/icon.icns",
+      "icons/icon.ico"
+    ]
+  },
+  "$schema": "../node_modules/@tauri-apps/cli/schema.json"
 }
