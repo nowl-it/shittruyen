@@ -4,7 +4,7 @@
 	"identifier": "com.nowl.dev",
 	"build": {
 		"frontendDist": "../dist",
-		"devUrl": "http://localhost:3000",
+		"devUrl": "http://localhost:1420",
 		"beforeDevCommand": "pnpm run dev",
 		"beforeBuildCommand": "pnpm run build"
 	},
