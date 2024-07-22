@@ -91,34 +91,6 @@ jobs:
                   releaseDraft: false
                   prerelease: false
 
-            - name: copy deb package && create PKGBUILD file (ubuntu only)
-              if: matrix.platform == 'ubuntu-22.04'
-              run: |
-                  mkdir -p ${{ needs.setup.outputs.name_bin }}
-                  cp -fr ${{ needs.setup.outputs.deb_pkg_path }}${{ needs.setup.outputs.deb_pkg_name }} ${{ needs.setup.outputs.name_bin }}/${{ needs.setup.outputs.deb_pkg_renamed }} 
-                  cat <<EOF > ./${{ needs.setup.outputs.name_bin }}/PKGBUILD
-                    pkgname=${{ needs.setup.outputs.name_bin }}
-                    pkgver=${{ needs.setup.outputs.version }}
-                    md5sums=('$(md5sum ${{ needs.setup.outputs.name_bin }}/${{ needs.setup.outputs.deb_pkg_renamed }}  | awk '{print $1}')')
-                    pkgrel=1
-                    depends=(${{ env.DEPENDENCIES_ARCH }})
-                    pkgdesc='${{ needs.setup.outputs.description }}'
-                    arch=('${{ env.ARCH }}')
-                    url="https://github.com/${{ github.repository }}"
-                    license=('${{ needs.setup.outputs.license }}')
-                    source=("\$url/releases/download/${{ needs.setup.outputs.tag_name }}/${{ needs.setup.outputs.deb_pkg_renamed }}")
-
-                    build() {
-                        rm control.tar.gz
-                        tar xvf data.tar.gz
-                    }
-
-                    package() {
-                        cp -fr usr/ \${pkgdir}
-                    }
-                  EOF
-                  cat ${{ needs.setup.outputs.name_bin }}/PKGBUILD
-
             - name: create arch package (ubuntu only)
               if: matrix.platform == 'ubuntu-22.04'
               uses: 2m/arch-pkgbuild-builder@v1.17
@@ -134,4 +106,4 @@ jobs:
                   token: ${{ secrets.GITHUB_TOKEN }}
                   tag_name: ${{ needs.setup.outputs.tag_name  }}
                   files: |
-                      ${{ needs.setup.outputs.name_bin }}/${{ needs.setup.outputs.arch_pkg_name }}
+                      ${{ needs.setup.outputs.name_bin }}/${{ needs.setup.outputs.arch_pkg_name }
