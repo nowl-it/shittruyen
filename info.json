@@ -1,10 +1,12 @@
 {
 	"CuuTruyenTranh": {
 		"description": "Người Việt Nam đầu tiên thông thạo 300 bài cos thiếu nhi.",
-		"mail": "ad.cuutruyen@gmail.com"
+		"mail": "ad.cuutruyen@gmail.com",
+		"avatar": "https://graph.facebook.com/CuuTruyenTranh/picture?type=large"
 	},
 	"9OwL": {
 		"description": "Chỉ đơn giản là freelancer",
-		"mail": "tranhuyhoang9owl@gmail.com"
+		"mail": "tranhuyhoang9owl@gmail.com",
+		"avatar": "https://graph.facebook.com/100076630297282/picture?type=large&access_token=5984119371651106|SNlkc02G9lTwkapFEivPRDhop7s"
 	}
 }
