@@ -1,0 +1,30 @@
+.nature\/light {
+	--background: 58 65% 83%;
+	--foreground: 187 33% 43%;
+
+	--muted: 70 20% 68%;
+	--muted-foreground: 187 33% 43%;
+
+	--popover: 58 65% 83%;
+	--popover-foreground: 187 33% 43%;
+
+	--border: 93 28% 56%;
+	--input: 93 28% 56%;
+
+	--card: 58 65% 83%;
+	--card-foreground: 187 33% 43%;
+
+	--primary: 93 28% 56%;
+	--primary-foreground: 58 65% 83%;
+
+	--secondary: 70 20% 68%;
+	--secondary-foreground: 187 33% 43%;
+
+	--accent: 70 20% 68%;
+	--accent-foreground: 187 33% 43%;
+
+	--destructive: 187 33% 43%;
+	--destructive-foreground: 58 65% 83%;
+
+	--ring: 93 28% 56%;
+}

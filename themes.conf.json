@@ -1,0 +1,294 @@
+{
+    "general": {
+        "default": {
+            "theme": {
+                "name": "Mặc định (Sáng)",
+                "value": "default/light"
+            }
+        }
+    },
+    "resource": {
+        "themes": [
+            {
+                "name": "Catppuccin (Frappe) Blue",
+                "value": "catppuccin/frappe-blue"
+            },
+            {
+                "name": "Catppuccin (Frappe) Flamingo",
+                "value": "catppuccin/frappe-flamingo"
+            },
+            {
+                "name": "Catppuccin (Frappe) Green",
+                "value": "catppuccin/frappe-green"
+            },
+            {
+                "name": "Catppuccin (Frappe) Lavender",
+                "value": "catppuccin/frappe-lavender"
+            },
+            {
+                "name": "Catppuccin (Frappe) Maroon",
+                "value": "catppuccin/frappe-maroon"
+            },
+            {
+                "name": "Catppuccin (Frappe) Mauve",
+                "value": "catppuccin/frappe-mauve"
+            },
+            {
+                "name": "Catppuccin (Frappe) Peach",
+                "value": "catppuccin/frappe-peach"
+            },
+            {
+                "name": "Catppuccin (Frappe) Pink",
+                "value": "catppuccin/frappe-pink"
+            },
+            {
+                "name": "Catppuccin (Frappe) Red",
+                "value": "catppuccin/frappe-red"
+            },
+            {
+                "name": "Catppuccin (Frappe) Rosewater",
+                "value": "catppuccin/frappe-rosewater"
+            },
+            {
+                "name": "Catppuccin (Frappe) Sapphire",
+                "value": "catppuccin/frappe-sapphire"
+            },
+            {
+                "name": "Catppuccin (Frappe) Sky",
+                "value": "catppuccin/frappe-sky"
+            },
+            {
+                "name": "Catppuccin (Frappe) Teal",
+                "value": "catppuccin/frappe-teal"
+            },
+            {
+                "name": "Catppuccin (Frappe) Yellow",
+                "value": "catppuccin/frappe-yellow"
+            },
+            {
+                "name": "Catppuccin (Latte) Blue",
+                "value": "catppuccin/latte-blue"
+            },
+            {
+                "name": "Catppuccin (Latte) Flamingo",
+                "value": "catppuccin/latte-flamingo"
+            },
+            {
+                "name": "Catppuccin (Latte) Green",
+                "value": "catppuccin/latte-green"
+            },
+            {
+                "name": "Catppuccin (Latte) Lavender",
+                "value": "catppuccin/latte-lavender"
+            },
+            {
+                "name": "Catppuccin (Latte) Maroon",
+                "value": "catppuccin/latte-maroon"
+            },
+            {
+                "name": "Catppuccin (Latte) Mauve",
+                "value": "catppuccin/latte-mauve"
+            },
+            {
+                "name": "Catppuccin (Latte) Peach",
+                "value": "catppuccin/latte-peach"
+            },
+            {
+                "name": "Catppuccin (Latte) Pink",
+                "value": "catppuccin/latte-pink"
+            },
+            {
+                "name": "Catppuccin (Latte) Red",
+                "value": "catppuccin/latte-red"
+            },
+            {
+                "name": "Catppuccin (Latte) Rosewater",
+                "value": "catppuccin/latte-rosewater"
+            },
+            {
+                "name": "Catppuccin (Latte) Sapphire",
+                "value": "catppuccin/latte-sapphire"
+            },
+            {
+                "name": "Catppuccin (Latte) Sky",
+                "value": "catppuccin/latte-sky"
+            },
+            {
+                "name": "Catppuccin (Latte) Teal",
+                "value": "catppuccin/latte-teal"
+            },
+            {
+                "name": "Catppuccin (Latte) Yellow",
+                "value": "catppuccin/latte-yellow"
+            },
+            {
+                "name": "Catppuccin (Macchiato) Blue",
+                "value": "catppuccin/macchiato-blue"
+            },
+            {
+                "name": "Catppuccin (Macchiato) Flamingo",
+                "value": "catppuccin/macchiato-flamingo"
+            },
+            {
+                "name": "Catppuccin (Macchiato) Green",
+                "value": "catppuccin/macchiato-green"
+            },
+            {
+                "name": "Catppuccin (Macchiato) Lavender",
+                "value": "catppuccin/macchiato-lavender"
+            },
+            {
+                "name": "Catppuccin (Macchiato) Maroon",
+                "value": "catppuccin/macchiato-maroon"
+            },
+            {
+                "name": "Catppuccin (Macchiato) Mauve",
+                "value": "catppuccin/macchiato-mauve"
+            },
+            {
+                "name": "Catppuccin (Macchiato) Peach",
+                "value": "catppuccin/macchiato-peach"
+            },
+            {
+                "name": "Catppuccin (Macchiato) Pink",
+                "value": "catppuccin/macchiato-pink"
+            },
+            {
+                "name": "Catppuccin (Macchiato) Red",
+                "value": "catppuccin/macchiato-red"
+            },
+            {
+                "name": "Catppuccin (Macchiato) Rosewater",
+                "value": "catppuccin/macchiato-rosewater"
+            },
+            {
+                "name": "Catppuccin (Macchiato) Sapphire",
+                "value": "catppuccin/macchiato-sapphire"
+            },
+            {
+                "name": "Catppuccin (Macchiato) Sky",
+                "value": "catppuccin/macchiato-sky"
+            },
+            {
+                "name": "Catppuccin (Macchiato) Teal",
+                "value": "catppuccin/macchiato-teal"
+            },
+            {
+                "name": "Catppuccin (Macchiato) Yellow",
+                "value": "catppuccin/macchiato-yellow"
+            },
+            {
+                "name": "Catppuccin (Mocha) Blue",
+                "value": "catppuccin/mocha-blue"
+            },
+            {
+                "name": "Catppuccin (Mocha) Flamingo",
+                "value": "catppuccin/mocha-flamingo"
+            },
+            {
+                "name": "Catppuccin (Mocha) Green",
+                "value": "catppuccin/mocha-green"
+            },
+            {
+                "name": "Catppuccin (Mocha) Lavender",
+                "value": "catppuccin/mocha-lavender"
+            },
+            {
+                "name": "Catppuccin (Mocha) Maroon",
+                "value": "catppuccin/mocha-maroon"
+            },
+            {
+                "name": "Catppuccin (Mocha) Mauve",
+                "value": "catppuccin/mocha-mauve"
+            },
+            {
+                "name": "Catppuccin (Mocha) Peach",
+                "value": "catppuccin/mocha-peach"
+            },
+            {
+                "name": "Catppuccin (Mocha) Pink",
+                "value": "catppuccin/mocha-pink"
+            },
+            {
+                "name": "Catppuccin (Mocha) Red",
+                "value": "catppuccin/mocha-red"
+            },
+            {
+                "name": "Catppuccin (Mocha) Rosewater",
+                "value": "catppuccin/mocha-rosewater"
+            },
+            {
+                "name": "Catppuccin (Mocha) Sapphire",
+                "value": "catppuccin/mocha-sapphire"
+            },
+            {
+                "name": "Catppuccin (Mocha) Sky",
+                "value": "catppuccin/mocha-sky"
+            },
+            {
+                "name": "Catppuccin (Mocha) Teal",
+                "value": "catppuccin/mocha-teal"
+            },
+            {
+                "name": "Catppuccin (Mocha) Yellow",
+                "value": "catppuccin/mocha-yellow"
+            },
+            {
+                "name": "Default (Dark) ",
+                "value": "default/dark"
+            },
+            {
+                "name": "Default (Light) ",
+                "value": "default/light"
+            },
+            {
+                "name": "Dracula (Dark) ",
+                "value": "dracula/dark"
+            },
+            {
+                "name": "Dracula (Light) ",
+                "value": "dracula/light"
+            },
+            {
+                "name": "Gold (Dark) ",
+                "value": "gold/dark"
+            },
+            {
+                "name": "Gold (Light) ",
+                "value": "gold/light"
+            },
+            {
+                "name": "Laracon (Dark) ",
+                "value": "laracon/dark"
+            },
+            {
+                "name": "Laracon (Light) ",
+                "value": "laracon/light"
+            },
+            {
+                "name": "Nature (Dark) ",
+                "value": "nature/dark"
+            },
+            {
+                "name": "Nature (Light) ",
+                "value": "nature/light"
+            },
+            {
+                "name": "Netflix (Dark) ",
+                "value": "netflix/dark"
+            },
+            {
+                "name": "Netflix (Light) ",
+                "value": "netflix/light"
+            },
+            {
+                "name": "Nord (Dark) ",
+                "value": "nord/dark"
+            },
+            {
+                "name": "Nord (Light) ",
+                "value": "nord/light"
+            }
+        ]
+    }
+}
