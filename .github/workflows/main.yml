@@ -41,7 +41,7 @@ jobs:
                   echo "description=$(node -p "require('./package.json').description")" >> $GITHUB_OUTPUT
                   echo "license=$(node -p "require('./package.json').license")" >> $GITHUB_OUTPUT
 
-    Build App:
+    build:
         needs: [setup]
         permissions:
             contents: write
