@@ -12,7 +12,7 @@ env:
     DEPENDENCIES_ARCH: "'cmake' 'libappindicator-gtk3' 'webkit2gtk' 'gtk3' 'xdotool'"
     DEPENDENCIES_RPM: 'cmake, javascriptcoregtk-4.1, libsoup-3.0, webkit2gtk-4.1, libxdo, libappindicator-gtk3, xdotool'
 jobs:
-    Setup environment:
+    setup:
         runs-on: ubuntu-latest
         outputs:
             name: ${{ steps.get-package.outputs.name }}
