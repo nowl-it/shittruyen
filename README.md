@@ -1,4 +1,4 @@
-[![Cuttruyen](https://nettrom.com/favicon.ico)](https://nettrom.com/)
+[![Cuttruyen](/public/banner.png)](https://nettrom.com/)
 
 # ShitTruyen _(beta)_
 
