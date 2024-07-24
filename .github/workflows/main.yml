@@ -1,4 +1,4 @@
-name: 'publish'
+name: 'Auto Build App (Window, Linux, MacOS)'
 
 on:
     workflow_dispatch:
@@ -12,7 +12,7 @@ env:
     DEPENDENCIES_ARCH: "'cmake' 'libappindicator-gtk3' 'webkit2gtk' 'gtk3' 'xdotool'"
     DEPENDENCIES_RPM: 'cmake, javascriptcoregtk-4.1, libsoup-3.0, webkit2gtk-4.1, libxdo, libappindicator-gtk3, xdotool'
 jobs:
-    setup:
+    Setup environment:
         runs-on: ubuntu-latest
         outputs:
             name: ${{ steps.get-package.outputs.name }}
@@ -27,12 +27,13 @@ jobs:
             rpm_pkg_name: RPMS/${{ steps.get-package.outputs.name }}-${{ steps.get-package.outputs.version }}-1.${{ env.ARCH }}.rpm
             tag_name: v${{ steps.get-package.outputs.version }}
         steps:
+            - name: Checkout
             - uses: actions/checkout@v4
-            - name: setup node
+            - name: Setup node.js (v20)
               uses: actions/setup-node@v4
               with:
                   node-version: 20
-            - name: get package info
+            - name: Get package info
               id: get-package
               run: |
                   echo "name=$(node -p "require('./package.json').name")" >> $GITHUB_OUTPUT
@@ -40,39 +41,41 @@ jobs:
                   echo "description=$(node -p "require('./package.json').description")" >> $GITHUB_OUTPUT
                   echo "license=$(node -p "require('./package.json').license")" >> $GITHUB_OUTPUT
 
-    build-tauri:
+    Build App:
         needs: [setup]
         permissions:
             contents: write
         strategy:
             fail-fast: false
             matrix:
-                platform: [macos-latest, ubuntu-latest, windows-latest]
+                platform: [windows-latest, ubuntu-latest, macos-latest]
         runs-on: ${{ matrix.platform }}
         steps:
+            - name: Checkout
             - uses: actions/checkout@v4
 
-            - name: setup node
+            - name: Setup node.js (v20)
               uses: actions/setup-node@v4
               with:
                   node-version: 20
 
-            - name: install rust stable
+            - name: Install Rust (stable)
               uses: dtolnay/rust-toolchain@stable
 
-            - name: install dependencies (ubuntu only)
+            - name: Install dependencies (Linux only)
               if: matrix.platform == 'ubuntu-latest'
               run: |
                   sudo apt-get update
                   sudo apt-get install -y cmake libgtk-3-dev libwebkit2gtk-4.1-dev libappindicator3-dev librsvg2-dev libxcb-shape0-dev libxcb-xfixes0-dev libxdo-dev libssl1.1
 
-            - name: install frontend dependencies
+            - name: Install frontend dependencies
               run: yarn install
 
             - name: Set NO_STRIP environment variable
               if: matrix.platform == 'ubuntu-latest' || matrix.platform == 'macos-latest'
               run: echo "NO_STRIP=true" >> $GITHUB_ENV
 
+            - name: Run Tauri Action
             - uses: tauri-apps/tauri-action@v0
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -83,7 +86,7 @@ jobs:
                   releaseDraft: false
                   prerelease: false
 
-            - name: copy deb package && create PKGBUILD file (ubuntu only)
+            - name: Copy deb package && Create PKGBUILD file (Linux only)
               if: matrix.platform == 'ubuntu-latest'
               run: |
                   mkdir -p ${{ needs.setup.outputs.name_bin }}
@@ -111,7 +114,7 @@ jobs:
                   EOF
                   cat ${{ needs.setup.outputs.name_bin }}/PKGBUILD
 
-            - name: create arch package (ubuntu only)
+            - name: Create arch package (Linux only)
               if: matrix.platform == 'ubuntu-latest'
               uses: 2m/arch-pkgbuild-builder@v1.17
               with:
@@ -119,49 +122,7 @@ jobs:
                   target: pkgbuild
                   pkgname: ${{ needs.setup.outputs.name_bin }}/
 
-            # - name: copy deb package && create rpm.spec file (ubuntu only)
-            #   if: matrix.platform == 'ubuntu-latest'
-            #   run: |
-            #     mkdir -p ${{ needs.setup.outputs.name_bin }}
-            #     cp -fr ${{ needs.setup.outputs.deb_pkg_path }}/${{ needs.setup.outputs.deb_pkg_name }} ${{ needs.setup.outputs.name_bin }}/${{ needs.setup.outputs.deb_pkg_renamed }}
-            #     cat <<EOF > ./${{ needs.setup.outputs.name_bin }}/rpm.spec
-            #     Name: ${{ needs.setup.outputs.name }}
-            #     Version: ${{ needs.setup.outputs.version }}
-            #     BuildArch: ${{ env.ARCH }}
-            #     Release: 1
-            #     Summary: ${{ needs.setup.outputs.description }}
-            #     Requires: ${{ env.DEPENDENCIES_RPM }}
-            #     License: ${{ needs.setup.outputs.license }}
-            #     Source0: ${{ needs.setup.outputs.deb_pkg_renamed }}
-
-            #     %description
-            #     ${{ needs.setup.outputs.description }}
-
-            #     %prep
-            #     ar x %{SOURCE0}
-
-            #     %build
-            #     rm -rf control.tar.gz
-            #     tar xvf data.tar.gz
-
-            #     %install
-            #     cp -fr usr/ %{buildroot}
-
-            #     %files
-            #     %{_bindir}/${{ needs.setup.outputs.name }}
-            #     /usr/share/applications/${{ needs.setup.outputs.name }}.desktop
-            #     /usr/share/icons/hicolor/**/*
-            #     EOF
-            #     cat ${{ needs.setup.outputs.name_bin }}/rpm.spec
-
-            # - name: createa rpm package (ubuntu only)
-            #   if: matrix.platform == 'ubuntu-latest'
-            #   uses: Antikythera/build-rpm@latest
-            #   with:
-            #     spec_file: ${{ needs.setup.outputs.name_bin }}/rpm.spec
-            #     sources: ${{ needs.setup.outputs.name_bin }}/${{ needs.setup.outputs.deb_pkg_renamed }}
-
-            - name: upload arch && rpm release (ubuntu only)
+            - name: Upload Arch && RPM Release (Linux only)
               if: matrix.platform == 'ubuntu-latest'
               uses: softprops/action-gh-release@v1
               with:
