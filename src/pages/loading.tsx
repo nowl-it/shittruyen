@@ -6,8 +6,8 @@ export interface LoadingProps extends HTMLAttributes<HTMLDivElement> {
 
 const Loading = forwardRef<HTMLDivElement, LoadingProps>((props, ref) => {
 	return (
-		<div className="col-span-full row-span-full size-full content-center text-center" ref={ref}>
-			<h1 className="text-2xl">Cuttruyen Is Suck</h1>
+		<div className="h-screen w-full content-center text-center" ref={ref} {...props}>
+			<h1 className="text-4xl">Cứt Truyện rác vcl 🐧</h1>
 		</div>
 	);
 });

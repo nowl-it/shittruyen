@@ -10,13 +10,14 @@ import {
 	CommandShortcut
 } from '@/components/ui/command';
 import { cn } from '@/lib/utils';
+import useSEOStore from '@/store/seo';
 import { Home, SearchIcon, Settings } from 'lucide-react';
 import { Fragment, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { DialogTitle } from '../ui/dialog';
 import Kbd from '../ui/kbd';
 
-const PLACEHOLDER_TEXT = 'Tìm kiếm...';
+const PLACEHOLDER_TEXT = 'Tìm kiếm nhanh...';
 
 type DialogListType = {
 	heading: string;
@@ -62,12 +63,12 @@ export default function Center() {
 
 	const navigation = useNavigate();
 
-	const { title } = document;
-
 	function handleCommandItem(value: string) {
 		navigation(value);
 		setOpen(false);
 	}
+
+	const { title } = useSEOStore();
 
 	return (
 		<label className="relative col-span-6 size-full">

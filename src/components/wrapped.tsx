@@ -1,44 +1,25 @@
-import { cn } from '@/lib/utils';
 import Loading from '@/pages/loading';
 import useLoadingStore from '@/store/loading';
-import useThemeStore from '@/store/theme';
-import { useTheme } from 'next-themes';
-import { Fragment, useEffect } from 'react';
-import { Outlet, useNavigate, useNavigation } from 'react-router-dom';
+import { Fragment } from 'react';
+import { Helmet } from 'react-helmet-async';
+import { Outlet } from 'react-router-dom';
+import useSEOStore from '../store/seo';
 import Header from './header';
 import Sidebar from './sidebar';
 
 export default function Wrapped() {
-	const { isLoading, setIsLoading } = useLoadingStore((state) => state);
-	const { theme } = useTheme();
-	const { setTheme } = useThemeStore();
-	const navigation = useNavigation();
-	const navigate = useNavigate();
-
-	function handleRouteChange() {
-		const isWelcomeDone = localStorage.getItem('welcome');
-		if (!isWelcomeDone) navigate('/welcome');
-		if (navigation.state === 'loading') return;
-		setIsLoading(false);
-		if (theme) setTheme(theme);
-	}
-
-	useEffect(() => {
-		handleRouteChange();
-
-		return () => {
-			setIsLoading(true);
-		};
-	}, [navigation.state]);
+	const isLoading = useLoadingStore((state) => state.isLoading);
+	const { setState } = useSEOStore();
 
 	if (isLoading) return <Loading />;
 
 	return (
 		<Fragment>
+			<Helmet defaultTitle="Trang Chủ" prioritizeSeoTags onChangeClientState={(newState) => setState(newState)} />
 			<Header />
-			<Sidebar />
-			<main className="col-span-ful relative size-full min-h-full">
-				<article className={cn('size-full min-h-full p-8')}>
+			<main className="relative flex size-full min-h-full flex-row items-stretch justify-stretch p-navbar">
+				<Sidebar />
+				<article className="size-full min-h-full p-8">
 					<Outlet />
 				</article>
 			</main>

@@ -6,17 +6,13 @@
 @tailwind variants;
 
 @layer base {
-    :root {
-        --radius: 0.5rem;
-        --navbar-height: 2.25rem;
-        scroll-padding: 0;
-    }
+	:root {
+		--radius: 0.5rem;
+		--navbar-height: 2.25rem;
+		scroll-padding: 0;
+	}
 
-    * {
-        @apply select-none border-border text-foreground;
-    }
-
-    body>div#__shittruyen {
-        @apply relative bg-background min-h-screen w-full grid grid-rows-[auto_auto] grid-cols-[auto_1fr];
-    }
+	* {
+		@apply select-none border-border text-foreground;
+	}
 }
