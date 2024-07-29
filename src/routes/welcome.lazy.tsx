@@ -1,5 +1,10 @@
 import { BackgroundBeams } from '@/components/ui/background-beams';
 import { Spotlight } from '@/components/ui/spotlight';
+import { createLazyFileRoute } from '@tanstack/react-router';
+
+export const Route = createLazyFileRoute('/welcome')({
+	component: Welcome
+});
 
 export default function Welcome() {
 	return (

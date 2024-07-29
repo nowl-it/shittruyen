@@ -1,5 +1,4 @@
 import { cn } from '@/lib/utils';
-import useSidebarStore from '@/store/sidebar';
 import { Bookmark } from 'lucide-react';
 import { ScrollArea } from '../ui/scroll-area';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '../ui/tooltip';
@@ -7,10 +6,10 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '../ui/
 const BookmarkItemClasses = 'size-10 cursor-pointer content-center rounded-full border border-dashed border-primary';
 
 export default function Left() {
-	const { bookmark } = useSidebarStore();
+	const bookmark: any[] = [];
 
 	return (
-		<div className="flex h-full w-16 min-w-16 flex-col items-center justify-center px-2 py-4">
+		<div className="flex h-full w-16 flex-none flex-col items-center justify-center px-2 py-4">
 			<TooltipProvider>
 				<ScrollArea className="size-full">
 					<ul className="flex size-full flex-col items-center justify-start">

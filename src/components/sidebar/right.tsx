@@ -1,6 +1,6 @@
 import { cn } from '@/lib/utils';
+import { Link } from '@tanstack/react-router';
 import { Bookmark, Home, LogIn, Search, Settings, Tag, User } from 'lucide-react';
-import { Link } from 'react-router-dom';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '../ui/tooltip';
 
 const iconClasses =
@@ -8,7 +8,7 @@ const iconClasses =
 
 export default function Right() {
 	return (
-		<div className="relative flex h-full w-14 flex-col items-center justify-center border-x p-4">
+		<div className="relative flex h-full w-14 flex-none flex-col items-center justify-center border-x p-4">
 			<TooltipProvider>
 				<ul className="h-full space-y-3">
 					<Tooltip>

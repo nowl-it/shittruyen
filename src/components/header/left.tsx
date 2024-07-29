@@ -1,7 +1,7 @@
 import { cn } from '@/lib/utils';
 import useLoadingStore from '@/store/loading';
+import { Link, useRouter } from '@tanstack/react-router';
 import { ArrowLeftIcon, ArrowRightIcon, Home, RefreshCw } from 'lucide-react';
-import { Link, useNavigate } from 'react-router-dom';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '../ui/tooltip';
 
 const classes =
@@ -12,7 +12,7 @@ function reload() {
 }
 
 export default function Left() {
-	const navigate = useNavigate();
+	const { history } = useRouter();
 	const { setIsLoading } = useLoadingStore();
 
 	async function handleClick(control?: any) {
@@ -42,13 +42,13 @@ export default function Left() {
 				</Tooltip>
 				<Tooltip>
 					<TooltipTrigger>
-						<ArrowLeftIcon className={classes} onClick={() => handleClick(navigate(-1))} />
+						<ArrowLeftIcon className={classes} onClick={() => handleClick(history.back())} />
 					</TooltipTrigger>
 					<TooltipContent>Quay lại trang trước</TooltipContent>
 				</Tooltip>
 				<Tooltip>
 					<TooltipTrigger>
-						<ArrowRightIcon className={classes} onClick={() => handleClick(navigate(1))} />
+						<ArrowRightIcon className={classes} onClick={() => handleClick(history.forward())} />
 					</TooltipTrigger>
 					<TooltipContent>Tiến lên trang kế</TooltipContent>
 				</Tooltip>

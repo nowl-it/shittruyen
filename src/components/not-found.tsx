@@ -1,6 +1,7 @@
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card';
 import { cn } from '@/lib/utils';
+import { createLazyFileRoute } from '@tanstack/react-router';
 import Info from 'global/info.json';
 import { Mail } from 'lucide-react';
 import { Helmet } from 'react-helmet-async';
@@ -37,6 +38,10 @@ const chat: Chat[] = [
 		type: 'reply'
 	}
 ];
+
+export const Route = createLazyFileRoute('/not-found')({
+	component: NotFound
+});
 
 export default function NotFound() {
 	return (

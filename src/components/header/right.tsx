@@ -3,11 +3,11 @@ import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, Command
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { cn } from '@/lib/utils';
 import useThemeStore from '@/store/theme';
+import { Link } from '@tanstack/react-router';
 import themeSettings from 'global/themes.conf.json';
 import { BellIcon, Check, ChevronsUpDown } from 'lucide-react';
 import { useTheme } from 'next-themes';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '../ui/tooltip';
 
 const themes = themeSettings.resource.themes;

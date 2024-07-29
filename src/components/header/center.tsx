@@ -11,9 +11,9 @@ import {
 } from '@/components/ui/command';
 import { cn } from '@/lib/utils';
 import useSEOStore from '@/store/seo';
+import { useNavigate } from '@tanstack/react-router';
 import { Home, SearchIcon, Settings } from 'lucide-react';
 import { Fragment, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { DialogTitle } from '../ui/dialog';
 import Kbd from '../ui/kbd';
 
@@ -63,8 +63,8 @@ export default function Center() {
 
 	const navigation = useNavigate();
 
-	function handleCommandItem(value: string) {
-		navigation(value);
+	function handleCommandItem(to: string) {
+		navigation({ to });
 		setOpen(false);
 	}
 
