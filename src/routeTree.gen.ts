@@ -18,6 +18,14 @@ import { Route as IndexImport } from './routes/index'
 // Create Virtual Routes
 
 const WelcomeLazyImport = createFileRoute('/welcome')()
+const TagLazyImport = createFileRoute('/tag')()
+const SearchLazyImport = createFileRoute('/search')()
+const NotificationLazyImport = createFileRoute('/notification')()
+const NotFoundLazyImport = createFileRoute('/not-found')()
+const BookmarkLazyImport = createFileRoute('/bookmark')()
+const SettingGeneralLazyImport = createFileRoute('/setting/general')()
+const SettingAccountLazyImport = createFileRoute('/setting/account')()
+const AuthSignInLazyImport = createFileRoute('/auth/sign-in')()
 
 // Create/Update Routes
 
@@ -26,10 +34,54 @@ const WelcomeLazyRoute = WelcomeLazyImport.update({
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import('./routes/welcome.lazy').then((d) => d.Route))
 
+const TagLazyRoute = TagLazyImport.update({
+  path: '/tag',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() => import('./routes/tag.lazy').then((d) => d.Route))
+
+const SearchLazyRoute = SearchLazyImport.update({
+  path: '/search',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() => import('./routes/search.lazy').then((d) => d.Route))
+
+const NotificationLazyRoute = NotificationLazyImport.update({
+  path: '/notification',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() => import('./routes/notification.lazy').then((d) => d.Route))
+
+const NotFoundLazyRoute = NotFoundLazyImport.update({
+  path: '/not-found',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() => import('./routes/not-found.lazy').then((d) => d.Route))
+
+const BookmarkLazyRoute = BookmarkLazyImport.update({
+  path: '/bookmark',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() => import('./routes/bookmark.lazy').then((d) => d.Route))
+
 const IndexRoute = IndexImport.update({
   path: '/',
   getParentRoute: () => rootRoute,
 } as any)
+
+const SettingGeneralLazyRoute = SettingGeneralLazyImport.update({
+  path: '/setting/general',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() =>
+  import('./routes/setting/general.lazy').then((d) => d.Route),
+)
+
+const SettingAccountLazyRoute = SettingAccountLazyImport.update({
+  path: '/setting/account',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() =>
+  import('./routes/setting/account.lazy').then((d) => d.Route),
+)
+
+const AuthSignInLazyRoute = AuthSignInLazyImport.update({
+  path: '/auth/sign-in',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() => import('./routes/auth/sign-in.lazy').then((d) => d.Route))
 
 // Populate the FileRoutesByPath interface
 
@@ -42,6 +94,41 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexImport
       parentRoute: typeof rootRoute
     }
+    '/bookmark': {
+      id: '/bookmark'
+      path: '/bookmark'
+      fullPath: '/bookmark'
+      preLoaderRoute: typeof BookmarkLazyImport
+      parentRoute: typeof rootRoute
+    }
+    '/not-found': {
+      id: '/not-found'
+      path: '/not-found'
+      fullPath: '/not-found'
+      preLoaderRoute: typeof NotFoundLazyImport
+      parentRoute: typeof rootRoute
+    }
+    '/notification': {
+      id: '/notification'
+      path: '/notification'
+      fullPath: '/notification'
+      preLoaderRoute: typeof NotificationLazyImport
+      parentRoute: typeof rootRoute
+    }
+    '/search': {
+      id: '/search'
+      path: '/search'
+      fullPath: '/search'
+      preLoaderRoute: typeof SearchLazyImport
+      parentRoute: typeof rootRoute
+    }
+    '/tag': {
+      id: '/tag'
+      path: '/tag'
+      fullPath: '/tag'
+      preLoaderRoute: typeof TagLazyImport
+      parentRoute: typeof rootRoute
+    }
     '/welcome': {
       id: '/welcome'
       path: '/welcome'
@@ -49,12 +136,44 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof WelcomeLazyImport
       parentRoute: typeof rootRoute
     }
+    '/auth/sign-in': {
+      id: '/auth/sign-in'
+      path: '/auth/sign-in'
+      fullPath: '/auth/sign-in'
+      preLoaderRoute: typeof AuthSignInLazyImport
+      parentRoute: typeof rootRoute
+    }
+    '/setting/account': {
+      id: '/setting/account'
+      path: '/setting/account'
+      fullPath: '/setting/account'
+      preLoaderRoute: typeof SettingAccountLazyImport
+      parentRoute: typeof rootRoute
+    }
+    '/setting/general': {
+      id: '/setting/general'
+      path: '/setting/general'
+      fullPath: '/setting/general'
+      preLoaderRoute: typeof SettingGeneralLazyImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
 // Create and export the route tree
 
-export const routeTree = rootRoute.addChildren({ IndexRoute, WelcomeLazyRoute })
+export const routeTree = rootRoute.addChildren({
+  IndexRoute,
+  BookmarkLazyRoute,
+  NotFoundLazyRoute,
+  NotificationLazyRoute,
+  SearchLazyRoute,
+  TagLazyRoute,
+  WelcomeLazyRoute,
+  AuthSignInLazyRoute,
+  SettingAccountLazyRoute,
+  SettingGeneralLazyRoute,
+})
 
 /* prettier-ignore-end */
 
@@ -65,14 +184,46 @@ export const routeTree = rootRoute.addChildren({ IndexRoute, WelcomeLazyRoute })
       "filePath": "__root.tsx",
       "children": [
         "/",
-        "/welcome"
+        "/bookmark",
+        "/not-found",
+        "/notification",
+        "/search",
+        "/tag",
+        "/welcome",
+        "/auth/sign-in",
+        "/setting/account",
+        "/setting/general"
       ]
     },
     "/": {
       "filePath": "index.tsx"
     },
+    "/bookmark": {
+      "filePath": "bookmark.lazy.tsx"
+    },
+    "/not-found": {
+      "filePath": "not-found.lazy.tsx"
+    },
+    "/notification": {
+      "filePath": "notification.lazy.tsx"
+    },
+    "/search": {
+      "filePath": "search.lazy.tsx"
+    },
+    "/tag": {
+      "filePath": "tag.lazy.tsx"
+    },
     "/welcome": {
       "filePath": "welcome.lazy.tsx"
+    },
+    "/auth/sign-in": {
+      "filePath": "auth/sign-in.lazy.tsx"
+    },
+    "/setting/account": {
+      "filePath": "setting/account.lazy.tsx"
+    },
+    "/setting/general": {
+      "filePath": "setting/general.lazy.tsx"
     }
   }
 }
