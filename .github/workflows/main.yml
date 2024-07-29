@@ -1,4 +1,4 @@
-name: 'Auto Build App (Window, Linux, MacOS)'
+name: 'Build Desktop App (Window, Linux, MacOS)'
 
 on:
     workflow_dispatch:
@@ -11,7 +11,7 @@ env:
     DEPENDENCIES_RPM: 'cmake, javascriptcoregtk-4.1, libsoup-3.0, webkit2gtk-4.1, libxdo, libappindicator-gtk3, xdotool'
 
 jobs:
-    setup:
+    SETUP:
         runs-on: ubuntu-latest
         outputs:
             name: ${{ steps.get-package.outputs.name }}
@@ -41,7 +41,7 @@ jobs:
                   echo "description=$(node -p "require('./package.json').description")" >> $GITHUB_OUTPUT
                   echo "license=$(node -p "require('./package.json').license")" >> $GITHUB_OUTPUT
 
-    build:
+    BUILD:
         needs: [setup]
         permissions:
             contents: write
@@ -49,7 +49,7 @@ jobs:
             fail-fast: false
             matrix:
                 platform: [windows-latest, ubuntu-latest, macos-latest]
-        runs-on: ${{ matrix.platform }}
+        runs-on: [${{ matrix.platform }}]
         steps:
             - name: Checkout
               uses: actions/checkout@v4
