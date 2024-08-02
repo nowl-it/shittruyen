@@ -6,7 +6,14 @@ import { ThemeProvider } from 'next-themes';
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { HelmetProvider } from 'react-helmet-async';
+import * as timeago from 'timeago.js';
+import vi from 'timeago.js/lib/lang/vi';
+import Error from './components/error';
+import Loading from './components/loading';
+import NotFound from './components/not-found';
 import { routeTree } from './routeTree.gen';
+
+timeago.register('vi', vi);
 
 const { general, resource } = ThemeConfig;
 const { theme: defaultTheme } = general.default;
@@ -20,7 +27,18 @@ const queryClient = new QueryClient({
 	}
 });
 
-const router = createRouter({ routeTree });
+const router = createRouter({
+	routeTree,
+	context: {
+		queryClient
+	},
+	defaultPreload: 'intent',
+	defaultPreloadStaleTime: 0,
+	defaultPendingMs: 1000,
+	defaultPendingComponent: Loading,
+	defaultNotFoundComponent: NotFound,
+	defaultErrorComponent: Error
+});
 
 declare module '@tanstack/react-router' {
 	interface Register {

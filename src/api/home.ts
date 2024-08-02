@@ -1,7 +1,8 @@
 import { HomeAPIResponse } from '@/types/home_a';
-import { FetchInstance } from '.';
+import { AxiosInstance } from '.';
 
 export const HomeAPI = async (): Promise<HomeAPIResponse> => {
-	const response = (await FetchInstance('/home_a')).json();
-	return response;
+	const response = await (await AxiosInstance()).get('/home_a');
+
+	return response.data;
 };

@@ -8,7 +8,7 @@ export default function Sidebar() {
 
 	return (
 		<motion.aside
-			className="sticky left-0 top-9 z-40 flex h-aside flex-row items-center justify-start overflow-hidden bg-secondary bg-clip-padding text-primary shadow-lg"
+			className="fixed left-0 top-9 z-40 flex h-aside flex-row items-center justify-start overflow-hidden bg-secondary bg-clip-padding text-primary shadow-lg"
 			initial={{ x: -200, width: '4rem', minWidth: '4rem' }}
 			animate={{ x: 0, width: open ? '7.5rem' : '4rem', minWidth: open ? '7.5rem' : '4rem' }}
 			transition={{ type: 'tween', duration: 0.35 }}

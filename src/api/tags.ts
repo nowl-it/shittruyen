@@ -1,12 +1,12 @@
 import { Tag } from '@/types/manga';
-import { FetchInstance } from '.';
+import { AxiosInstance } from '.';
 
 const getTags = async (id: number): Promise<Tag[]> => {
-	const response = await FetchInstance('/mangas/' + id);
-	if (response.ok) {
+	const response = await (await AxiosInstance()).get('/mangas/' + id);
+	if (response.status === 200) {
 		const {
 			data: { tags: data }
-		} = await response.json();
+		} = await response.data;
 		return data;
 	}
 	return [];

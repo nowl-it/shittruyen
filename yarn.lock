@@ -1355,6 +1355,13 @@
     "@tauri-apps/cli-win32-ia32-msvc" "2.0.0-beta.22"
     "@tauri-apps/cli-win32-x64-msvc" "2.0.0-beta.22"
 
+"@tauri-apps/plugin-dialog@^2.0.0-beta.7":
+  version "2.0.0-beta.7"
+  resolved "https://registry.yarnpkg.com/@tauri-apps/plugin-dialog/-/plugin-dialog-2.0.0-beta.7.tgz#84fee36b6e8ba031ff20f1572dde05c65df15422"
+  integrity sha512-myywwpsKbquDDzl5zaOmmLLv5O8EJ/GgHDAoVSPwO97R4iWzkDvj3HFF91tNh7i25Tu/bP6jYPAdZA1NCRxxtg==
+  dependencies:
+    "@tauri-apps/api" "2.0.0-beta.15"
+
 "@tauri-apps/plugin-http@^2.0.0-beta.8":
   version "2.0.0-beta.8"
   resolved "https://registry.yarnpkg.com/@tauri-apps/plugin-http/-/plugin-http-2.0.0-beta.8.tgz#3472b6b825edef40691f482dbd60766b99844379"
@@ -4769,6 +4776,18 @@ three@^0.151.3:
   version "0.151.3"
   resolved "https://registry.yarnpkg.com/three/-/three-0.151.3.tgz#0b3c7de4b070d5b66b15217f42465d67cbfa6004"
   integrity sha512-+vbuqxFy8kzLeO5MgpBHUvP/EAiecaDwDuOPPDe6SbrZr96kccF0ktLngXc7xA7bzyd3N0t2f6mw3Z9y6JCojQ==
+
+timeago-react@^3.0.6:
+  version "3.0.6"
+  resolved "https://registry.yarnpkg.com/timeago-react/-/timeago-react-3.0.6.tgz#d1b55af67ed21b1c5429b9ba8043d0d0f7dab295"
+  integrity sha512-4ywnCX3iFjdp84WPK7gt8s4n0FxXbYM+xv8hYL73p83dpcMxzmO+0W4xJuxflnkWNvum5aEaqTe6LZ3lUIudjQ==
+  dependencies:
+    timeago.js "^4.0.0"
+
+timeago.js@^4.0.0:
+  version "4.0.2"
+  resolved "https://registry.yarnpkg.com/timeago.js/-/timeago.js-4.0.2.tgz#724e8c8833e3490676c7bb0a75f5daf20e558028"
+  integrity sha512-a7wPxPdVlQL7lqvitHGGRsofhdwtkoSXPGATFuSOA2i1ZNQEPLrGnj68vOp2sOJTCFAQVXPeNMX/GctBaO9L2w==
 
 tiny-invariant@^1.3.3:
   version "1.3.3"
