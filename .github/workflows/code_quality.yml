@@ -20,6 +20,9 @@ jobs:
                     fetch-depth: 0  # a full history is required for pull request analysis
             -   run: |
                     yarn install --frozen-lockfile
+            -   name: 'Run Eslint'
+                run: |
+                    yarn eslint .
             -   name: 'Qodana Scan'
                 uses: JetBrains/qodana-action@v2024.1
                 env:
