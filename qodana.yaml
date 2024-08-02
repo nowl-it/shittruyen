@@ -2,6 +2,12 @@ version: "1.0"
 profile:
     name: qodana.starter
 linter: jetbrains/qodana-js:latest
+bootstrap: |
+    yarn install
 include:
     -   name: Eslint
-bootstrap: yarn install
+        paths:
+            - "**/*.js"
+            - "**/*.jsx"
+            - "**/*.ts"
+            - "**/*.tsx"
