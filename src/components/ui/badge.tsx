@@ -25,7 +25,7 @@ export interface BadgeProps extends HTMLAttributes<HTMLDivElement>, VariantProps
 }
 
 function Badge({ className, variant, asChild, ...props }: BadgeProps) {
-    const Component = asChild ? Slot : 'div';
+    let Component = asChild ? Slot : 'div';
     return <Component
             className={cn(badgeVariants({ variant }), className)} {...props} />;
 }
