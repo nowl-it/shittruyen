@@ -4,10 +4,3 @@ profile:
 linter: jetbrains/qodana-js:latest
 bootstrap: |
     yarn install
-include:
-    -   name: Eslint
-        paths:
-            - "**/*.js"
-            - "**/*.jsx"
-            - "**/*.ts"
-            - "**/*.tsx"
