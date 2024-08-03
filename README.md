@@ -35,6 +35,8 @@ Hiện tại ứng dụng đang trong giai đoạn phát triển, tôi rất hi 
 
 ## License
 
+MIT
+
 [//]: # 'ENV'
 [git-repo]: https://github.com/huyhoangg9owl/shittruyen.git
 [Tauri]: https://tauri.app

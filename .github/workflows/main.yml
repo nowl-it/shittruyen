@@ -21,7 +21,7 @@ jobs:
             description: ${{ steps.get-package.outputs.description }}
             license: ${{ steps.get-package.outputs.license }}
             deb_pkg_name: ${{ steps.get-package.outputs.name }}_${{ steps.get-package.outputs.version }}_amd64.deb
-            deb_pkg_path: ./tauri/target/release/bundle/deb/
+            deb_pkg_path: ./src-tauri/target/release/bundle/deb/
             deb_pkg_renamed: ${{ steps.get-package.outputs.name }}-${{ steps.get-package.outputs.version }}-${{ env.ARCH }}.deb
             arch_pkg_name: ${{ steps.get-package.outputs.name }}-${{ steps.get-package.outputs.version }}-1-${{ env.ARCH }}.pkg.tar.zst
             rpm_pkg_name: RPMS/${{ steps.get-package.outputs.name }}-${{ steps.get-package.outputs.version }}-1.${{ env.ARCH }}.rpm
