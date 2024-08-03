@@ -2,7 +2,11 @@
 	"compilerOptions": {
 		"target": "ESNext",
 		"useDefineForClassFields": true,
-		"lib": ["DOM", "DOM.Iterable", "ESNext"],
+		"lib": [
+			"DOM",
+			"DOM.Iterable",
+			"ESNext"
+		],
 		"allowJs": false,
 		"skipLibCheck": true,
 		"esModuleInterop": false,
@@ -17,12 +21,21 @@
 		"jsx": "react-jsx",
 		"baseUrl": ".",
 		"paths": {
-			"global/*": ["./*"],
-			"@/*": ["src/*"]
+			"global/*": [
+				"./*"
+			],
+			"@/*": [
+				"src/*"
+			]
 		}
 	},
-	"include": ["src"],
-	"exclude": ["node_modules", "tauri"],
+	"include": [
+		"src"
+	],
+	"exclude": [
+		"node_modules",
+		"src-tauri"
+	],
 	"references": [
 		{
 			"path": "./tsconfig.node.json"
