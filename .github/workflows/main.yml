@@ -121,7 +121,7 @@ jobs:
               with:
                   debug: true
                   target: pkgbuild
-                  pkgname: ${{ needs.setup.outputs.name_bin }}/
+                  pkgname: ${{ needs.setup.outputs.name }}/
 
             - name: Upload Arch && RPM Release (Linux only)
               if: matrix.platform == 'ubuntu-latest'
