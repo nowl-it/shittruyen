@@ -41,7 +41,7 @@ jobs:
                   echo "version=$(node -p "require('./package.json').version")" >> $GITHUB_OUTPUT
                   echo "description=$(node -p "require('./package.json').description")" >> $GITHUB_OUTPUT
                   echo "license=$(node -p "require('./package.json').license")" >> $GITHUB_OUTPUT
-                  echo "displayName=$(node -p "require('./package.json').displayName")" >> $GITHUB_OUTPUT
+                  echo "displayName='$(node -p "require('./package.json').displayName")'" >> $GITHUB_OUTPUT
 
     BUILD:
         needs: [SETUP]
