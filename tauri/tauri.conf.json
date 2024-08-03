@@ -1,4 +1,5 @@
 {
+  "$schema": "../node_modules/@tauri-apps/cli/schema.json",
   "productName": "shittruyen",
   "version": "0.0.1",
   "identifier": "com.nowl.dev",
@@ -33,8 +34,12 @@
       "icons/128x128@2x.png",
       "icons/icon.icns",
       "icons/icon.ico"
-    ]
+    ],
+	"shortDescription": "Đơn giản là Cứt Truyện thôi",
+	"longDescription": "ShitTruyen đơn giản là một desktop app đa nền tảng của web Cứt Truyện nhưng nhiều tính năng hơn.",
+	"copyright": "Copyright © 2024",
+	"category": "Utility",
+	"license": "MIT"
   },
-  "plugins": {},
-  "$schema": "../node_modules/@tauri-apps/cli/schema.json"
+  "plugins": {}
 }

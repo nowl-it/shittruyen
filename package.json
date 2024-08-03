@@ -1,5 +1,7 @@
 {
     "name": "shittruyen",
+	"displayName": "Cứt Truyện",
+	"description": "ShitTruyen đơn giản là một desktop app đa nền tảng của web Cứt Truyện nhưng nhiều tính năng hơn.",
     "private": true,
     "version": "0.0.1",
     "type": "module",

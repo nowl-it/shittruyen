@@ -1,7 +1,7 @@
 [package]
 name = "shittruyen"
 version = "0.0.1"
-description = "Đơn giản là Cứt Truyện thôi"
+description = "ShitTruyen đơn giản là một desktop app đa nền tảng của web Cứt Truyện nhưng nhiều tính năng hơn."
 authors = ["9OwL"]
 license = ""
 repository = ""

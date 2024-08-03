@@ -14,7 +14,7 @@ jobs:
     SETUP:
         runs-on: ubuntu-latest
         outputs:
-            name: ${{ steps.get-package.outputs.name }}
+            name: ${{ steps.get-package.outputs.displayName }}
             name_bin: ${{ steps.get-package.outputs.name }}
             version: ${{ steps.get-package.outputs.version }}
             description: ${{ steps.get-package.outputs.description }}
@@ -40,9 +40,10 @@ jobs:
                   echo "version=$(node -p "require('./package.json').version")" >> $GITHUB_OUTPUT
                   echo "description=$(node -p "require('./package.json').description")" >> $GITHUB_OUTPUT
                   echo "license=$(node -p "require('./package.json').license")" >> $GITHUB_OUTPUT
+                  echo "packageName=$(node -p "require('./package.json').packageName")" >> $GITHUB_OUTPUT
 
     BUILD:
-        needs: [setup]
+        needs: [SETUP]
         permissions:
             contents: write
         strategy:

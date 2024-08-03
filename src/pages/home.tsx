@@ -106,17 +106,6 @@ export function Spotlight({ data }: { data: SpotlightManga[] }) {
 export function MangaListCard({ data }: { data: NewChapterManga[] }) {
 	const plugin = useRef(Autoplay({ delay: 5000, stopOnInteraction: true }));
 	const [api, setApi] = useState<CarouselApi>();
-	const [current, setCurrent] = useState(0);
-
-	useEffect(() => {
-		if (!api) return;
-
-		setCurrent(api.selectedScrollSnap());
-
-		api.on('select', () => {
-			setCurrent(api.selectedScrollSnap());
-		});
-	}, [api]);
 
 	return (
 		<Carousel
@@ -125,7 +114,8 @@ export function MangaListCard({ data }: { data: NewChapterManga[] }) {
 			className="group/carousel relative w-full px-4"
 			opts={{
 				loop: true,
-				align: 'start'
+				align: 'start',
+				slidesToScroll: 5
 			}}
 			onMouseEnter={plugin.current.stop}
 			onMouseLeave={plugin.current.reset}
@@ -134,7 +124,7 @@ export function MangaListCard({ data }: { data: NewChapterManga[] }) {
 				{data.map((item, index) => (
 					<CarouselItem
 						onClick={() => api?.scrollTo(index)}
-						className={cn('basis-1/5', current === index ? 'opacity-100' : 'opacity-20')}
+						className="basis-1/5 opacity-20 transition-opacity duration-300 hover:opacity-100"
 						key={item.id}
 					>
 						<HoverCard>
@@ -142,7 +132,7 @@ export function MangaListCard({ data }: { data: NewChapterManga[] }) {
 								<img src={item.cover_url} alt={item.name} className="size-full rounded-lg" />
 							</HoverCardTrigger>
 							<HoverCardPortal container={document.body}>
-								<HoverCardContent side="right" hoverDisabled={current !== index}>
+								<HoverCardContent side="right">
 									<h1 className="text-lg font-semibold">{item.name}</h1>
 									<p className="text-sm">Chapter {item.newest_chapter_number}</p>
 									<span className="mr-2 text-sm">
