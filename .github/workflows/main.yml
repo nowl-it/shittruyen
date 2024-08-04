@@ -52,8 +52,7 @@ jobs:
         strategy:
             fail-fast: false
             matrix:
-                platform: [windows-latest, ubuntu-latest]
-                # platform: [windows-latest]
+                platform: [windows-latest, ubuntu-latest, macos-latest]
         runs-on: ${{ matrix.platform }}
         steps:
             - name: Checkout
@@ -90,6 +89,7 @@ jobs:
                   releaseName: ${{ needs.setup.outputs.tag_name  }}
                   releaseDraft: false
                   prerelease: false
+                  args: --verbose
 
             - name: Copy deb package && Create PKGBUILD file (Linux only)
               if: matrix.platform == 'ubuntu-latest'
