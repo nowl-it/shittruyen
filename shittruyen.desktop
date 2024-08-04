@@ -5,7 +5,7 @@ Comment={{comment}}
 {{/if}}
 Exec={{exec}}
 Icon={{icon}}
-Name={{name}}
+Name=Shit Truyen Go Skrttt
 Terminal=false
 Type=Application
 {{#if mime_type}}
