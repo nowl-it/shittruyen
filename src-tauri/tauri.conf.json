@@ -48,13 +48,13 @@
 			},
 			"deb": {
 				"files": {},
-				"desktopTemplate": "name='ShitTruyen'"
+				"desktopTemplate": "name=ShitTruyen"
 			},
 			"rpm": {
 				"epoch": 0,
 				"files": {},
 				"release": "1",
-				"desktopTemplate": "name='ShitTruyen'"
+				"desktopTemplate": "name=ShitTruyen"
 			}
 		}
 	},
