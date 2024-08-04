@@ -55,10 +55,10 @@
 			},
 			"nsis": null,
 			"wix": {
-				"template": "../bundle_templates/shittruyen.wxs",
+				"template": "../bundle_templates/window/main.wxs",
 				"language": {
 					"vi-VN": {
-						"localePath": "../bundle_templates/shittruyen.wxl"
+						"localePath": "../bundle_templates/window/main.wxl"
 					}
 				}
 			}
@@ -70,13 +70,13 @@
 			},
 			"deb": {
 				"files": {},
-				"desktopTemplate": "../bundle_templates/shittruyen.desktop"
+				"desktopTemplate": "../bundle_templates/linux/main.desktop"
 			},
 			"rpm": {
 				"epoch": 0,
 				"files": {},
 				"release": "1",
-				"desktopTemplate": "../bundle_templates/shittruyen.desktop"
+				"desktopTemplate": "../bundle_templates/linux/main.desktop"
 			}
 		}
 	},

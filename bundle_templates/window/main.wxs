@@ -14,7 +14,7 @@
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
 	<Product
 		Id="*"
-		Name="Cứu Truyện"
+		Name="Cứt Truyện"
 		UpgradeCode="{{upgrade_code}}"
 		Language="!(loc.TauriLanguage)"
 		Manufacturer="{{manufacturer}}"
