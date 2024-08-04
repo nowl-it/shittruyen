@@ -57,7 +57,8 @@
 				"template": "../bundle_templates/shittruyen.nsi"
 			},
 			"wix": {
-				"template": "../bundle_templates/shittruyen.wxs"
+				"template": "../bundle_templates/shittruyen.wxs",
+				"language": "en-US"
 			}
 		},
 		"linux": {
