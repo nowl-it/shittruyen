@@ -56,10 +56,11 @@
 			"nsis": null,
 			"wix": {
 				"template": "../bundle_templates/shittruyen.wxs",
-				"language": [
-					"en-US",
-					"vi-VN"
-				]
+				"language": {
+					"vi-VN": {
+						"localePath": "../bundle_templates/shittruyen.wxl"
+					}
+				}
 			}
 		},
 		"linux": {
