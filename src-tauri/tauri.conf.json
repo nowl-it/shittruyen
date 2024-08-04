@@ -39,7 +39,24 @@
 		"longDescription": "ShitTruyen đơn giản là một desktop app đa nền tảng của web Cứt Truyện nhưng nhiều tính năng hơn.",
 		"copyright": "Copyright © 2024",
 		"category": "Utility",
-		"license": "MIT"
+		"license": "MIT",
+		"publisher": "9OwL",
+		"linux": {
+			"appimage": {
+				"bundleMediaFramework": false,
+				"files": {}
+			},
+			"deb": {
+				"files": {},
+				"desktopTemplate": "name='ShitTruyen'"
+			},
+			"rpm": {
+				"epoch": 0,
+				"files": {},
+				"release": "1",
+				"desktopTemplate": "name='ShitTruyen'"
+			}
+		}
 	},
 	"plugins": {}
 }
