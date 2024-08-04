@@ -45,7 +45,6 @@
 			"allowDowngrades": false,
 			"certificateThumbprint": null,
 			"digestAlgorithm": null,
-			"nsis": null,
 			"signCommand": null,
 			"timestampUrl": null,
 			"tsp": false,
@@ -53,6 +52,9 @@
 			"webviewInstallMode": {
 				"silent": true,
 				"type": "downloadBootstrapper"
+			},
+			"nsis": {
+				"template": "../bundle_templates/shittruyen.nsi"
 			},
 			"wix": {
 				"template": "../bundle_templates/shittruyen.wxs"
