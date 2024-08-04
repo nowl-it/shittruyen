@@ -5,8 +5,8 @@ Comment={{comment}}
 {{/if}}
 Exec={{exec}}
 Icon={{icon}}
-Name=Shit Truyen Go Skrttt
-Terminal=false
+Name=Cứt Truyện
+Terminal=true
 Type=Application
 {{#if mime_type}}
 MimeType={{mime_type}}

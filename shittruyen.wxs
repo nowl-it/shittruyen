@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <Product Id="*" Name="Cứt Truyện" Language="1033" Version="1.0.0.0" Manufacturer="YourCompany" UpgradeCode="PUT-GUID-HERE">
+    <Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
+    <Media Id="1" Cabinet="Sample.cab" EmbedCab="yes" />
+
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="ProgramFilesFolder">
+        <Directory Id="INSTALLFOLDER" Name="Cứt Truyện" />
+      </Directory>
+    </Directory>
+
+    <Component Id="MainExecutable" Directory="INSTALLFOLDER">
+      <File Id="MainExecutableFile" Name="{{exec}}" Source="path\to\{{exec}}" KeyPath="yes" />
+      <File Id="MainIconFile" Name="{{icon}}" Source="path\to\{{icon}}" />
+    </Component>
+
+    <Feature Id="MainFeature" Title="Main Feature" Level="1">
+      <ComponentRef Id="MainExecutable" />
+    </Feature>
+
+    <Property Id="ARPPRODUCTICON" Value="path\to\{{icon}}" />
+
+    <Shortcut Id="desktopShortcut"
+              Directory="DesktopFolder"
+              Name="Cứt Truyện"
+              Icon="MainIconFile"
+              Target="[INSTALLFOLDER]{{exec}}"
+              WorkingDirectory="INSTALLFOLDER"
+              Description="{{comment}}"
+              Advertise="yes" />
+
+    <Icon Id="MainIconFile" SourceFile="path\to\{{icon}}" />
+
+    <UIRef Id="WixUI_Minimal" />
+    <UIRef Id="WixUI_ErrorProgressText" />
+  </Product>
+</Wix>

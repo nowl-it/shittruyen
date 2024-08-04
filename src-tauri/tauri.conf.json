@@ -41,6 +41,23 @@
 		"category": "Utility",
 		"license": "MIT",
 		"publisher": "9OwL",
+		"windows": {
+			"allowDowngrades": false,
+			"certificateThumbprint": null,
+			"digestAlgorithm": null,
+			"nsis": null,
+			"signCommand": null,
+			"timestampUrl": null,
+			"tsp": false,
+			"webviewFixedRuntimePath": null,
+			"webviewInstallMode": {
+				"silent": true,
+				"type": "downloadBootstrapper"
+			},
+			"wix": {
+				"template": "../shittruyen.wxs"
+			}
+		},
 		"linux": {
 			"appimage": {
 				"bundleMediaFramework": false,
