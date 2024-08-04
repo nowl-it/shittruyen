@@ -18,8 +18,7 @@
 		UpgradeCode="{{upgrade_code}}"
 		Language="!(loc.TauriLanguage)"
 		Manufacturer="{{manufacturer}}"
-		Version="{{version}}"
-		CodePage="65001">
+		Version="{{version}}">
 
 		<Package Id="*"
 			Keywords="Installer"
@@ -27,7 +26,7 @@
 			Languages="0"
 			Compressed="yes"
 			InstallScope="perMachine"
-			SummaryCodepage="!(loc.TauriCodepage)" />
+			SummaryCodepage="65001" />
 
 		<!-- https://docs.microsoft.com/en-us/windows/win32/msi/reinstallmode -->
 		<!-- reinstall all files; rewrite all registry entries; reinstall all shortcuts -->
