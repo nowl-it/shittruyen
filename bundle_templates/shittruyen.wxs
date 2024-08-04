@@ -18,7 +18,8 @@
             UpgradeCode="{{upgrade_code}}"
             Language="!(loc.TauriLanguage)"
             Manufacturer="{{manufacturer}}"
-            Version="{{version}}">
+            Version="{{version}}"
+			CodePage="65001">
 
         <Package Id="*"
                  Keywords="Installer"
