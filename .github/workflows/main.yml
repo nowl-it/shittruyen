@@ -53,6 +53,8 @@ jobs:
             fail-fast: false
             matrix:
                 platform: [windows-latest, ubuntu-latest]
+                platform_name: [Window, Linux]
+        name: ${{ matrix.platform_name }} Build
         runs-on: ${{ matrix.platform }}
         steps:
             - name: Checkout
