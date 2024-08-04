@@ -47,12 +47,14 @@
 				"files": {}
 			},
 			"deb": {
-				"files": {}
+				"files": {},
+				"desktopTemplate": "../shittruyen.desktop"
 			},
 			"rpm": {
 				"epoch": 0,
 				"files": {},
-				"release": "1"
+				"release": "1",
+				"desktopTemplate": "../shittruyen.desktop"
 			}
 		}
 	},
