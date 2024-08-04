@@ -53,12 +53,13 @@
 				"silent": true,
 				"type": "downloadBootstrapper"
 			},
-			"nsis": {
-				"template": "../bundle_templates/shittruyen.nsi"
-			},
+			"nsis": null,
 			"wix": {
 				"template": "../bundle_templates/shittruyen.wxs",
-				"language": "en-US"
+				"language": [
+					"en-US",
+					"vi-VN"
+				]
 			}
 		},
 		"linux": {
