@@ -106,7 +106,7 @@
         <Directory Id="TARGETDIR" Name="SourceDir">
             <Directory Id="DesktopFolder" Name="Desktop">
                 <Component Id="ApplicationShortcutDesktop" Guid="*">
-                    <Shortcut Id="ApplicationDesktopShortcut" Name="Cứt Truyện" Description="Runs Cứt Truyện" Target="[!Path]" WorkingDirectory="INSTALLDIR" />
+                    <Shortcut Id="ApplicationDesktopShortcut" Name="Cứt Truyện" Description="Chạy Cứt Truyện" Target="[!Path]" WorkingDirectory="INSTALLDIR" />
                     <RemoveFolder Id="DesktopFolder" On="uninstall" />
                     <RegistryValue Root="HKCU" Key="Software\\{{manufacturer}}\\Cứt Truyện" Name="Desktop Shortcut" Type="integer" Value="1" KeyPath="yes" />
                 </Component>
@@ -165,78 +165,55 @@
             <Component Id="UpdateTaskUninstaller" Guid="D4F6CC3F-32DC-5FD0-95E8-782FFD7BBCE1" Win64="$(var.Win64)">
                 <File Id="UpdateTaskUninstaller" Source="uninstall-task.ps1" KeyPath="yes" Checksum="yes"/>
             </Component>
-            {{/if~}}
+            {{/if}}
         </DirectoryRef>
 
         <Feature Id="ProductFeature" Title="Cứt Truyện" Level="1">
-            <ComponentRef Id="RegistryEntries" />
-            <ComponentRef Id="Path" />
+            <ComponentRef Id="RegistryEntries"/>
+            <ComponentRef Id="Path"/>
             {{#each binaries as |bin| ~}}
-            <ComponentRef Id="{{ bin.id }}" />
+            <ComponentRef Id="{{ bin.id }}"/>
             {{/each~}}
             {{#if enable_elevated_update_task}}
-            <ComponentRef Id="UpdateTask" />
-            <ComponentRef Id="UpdateTaskInstaller" />
-            <ComponentRef Id="UpdateTaskUninstaller" />
-            {{/if~}}
+            <ComponentRef Id="UpdateTask"/>
+            <ComponentRef Id="UpdateTaskInstaller"/>
+            <ComponentRef Id="UpdateTaskUninstaller"/>
+            {{/if}}
         </Feature>
 
-        <CustomAction Id="InstallWebView2" FileKey="Path" ExeCommand="/install" Return="check" Impersonate="yes"/>
-        <CustomAction Id="RemoveWebView2" FileKey="Path" ExeCommand="/uninstall" Return="check" Impersonate="yes"/>
-        <CustomAction Id="StartWebView2" FileKey="Path" ExeCommand="/start" Return="asyncNoWait" Impersonate="yes"/>
+        <CustomAction Id="CheckWebView2"
+                      FileKey="Path"
+                      ExeCommand="[SystemFolder]regsvr32.exe /s /n /i:[INSTALLDIR]WebView2Loader.dll"
+                      Return="check"/>
 
-        <CustomAction Id="PublishWebView2" Property="PublishWebView2" Value="1" />
+        <!-- If WebView2 is needed, install it -->
+        <CustomAction Id="DownloadWebView2"
+                      FileKey="Path"
+                      ExeCommand="[SystemFolder]regsvr32.exe /s /n /i:[INSTALLDIR]WebView2Loader.dll"
+                      Return="ignore" />
 
+        <!-- Call the download action during installation -->
         <InstallExecuteSequence>
-            <Custom Action="InstallWebView2" After="InstallExecute">NOT Installed AND NOT WEBVIEW2_INSTALLED</Custom>
-            <Custom Action="RemoveWebView2" After="InstallExecute">Installed AND WEBVIEW2_INSTALLED</Custom>
-            <Custom Action="StartWebView2" After="InstallExecute">NOT Installed AND WEBVIEW2_INSTALLED</Custom>
-            <Custom Action="PublishWebView2" After="InstallExecute">WEBVIEW2_INSTALLED</Custom>
+            <Custom Action="DownloadWebView2" After="InstallFinalize" />
         </InstallExecuteSequence>
 
-        <CustomAction Id="SetWebView2Action" Property="WEBVIEW2_ACTION" Value="install" />
+        <CustomAction Id="InstallWebView2"
+                      FileKey="Path"
+                      ExeCommand="[INSTALLDIR]WebView2Loader.dll"
+                      Return="check"/>
 
-        <CustomAction Id="UnpublishWebView2" Property="UnpublishWebView2" Value="1" />
+        <InstallExecuteSequence>
+            <Custom Action="InstallWebView2" After="InstallFinalize" />
+        </InstallExecuteSequence>
+
+        <!-- Call WebView2 action during uninstallation -->
+        <CustomAction Id="UninstallWebView2"
+                      FileKey="Path"
+                      ExeCommand="[INSTALLDIR]WebView2Loader.dll"
+                      Return="check"/>
+        <InstallExecuteSequence>
+            <Custom Action="UninstallWebView2" After="InstallFinalize"/>
+        </InstallExecuteSequence>
+
     </Product>
-
-    <Fragment>
-        <DirectoryRef Id="TARGETDIR">
-            <Directory Id="DesktopFolder" Name="Desktop">
-                <Component Id="ApplicationShortcutDesktop" Guid="*">
-                    <Shortcut Id="ApplicationDesktopShortcut" Name="Cứt Truyện" Description="Runs Cứt Truyện" Target="[!Path]" WorkingDirectory="INSTALLDIR" />
-                    <RemoveFolder Id="DesktopFolder" On="uninstall" />
-                    <RegistryValue Root="HKCU" Key="Software\\{{manufacturer}}\\Cứt Truyện" Name="Desktop Shortcut" Type="integer" Value="1" KeyPath="yes" />
-                </Component>
-            </Directory>
-            <Directory Id="$(var.PlatformProgramFilesFolder)" Name="PFiles">
-                <Directory Id="INSTALLDIR" Name="Cứt Truyện"/>
-            </Directory>
-            <Directory Id="ProgramMenuFolder">
-                <Directory Id="ApplicationProgramsFolder" Name="Cứt Truyện"/>
-            </Directory>
-        </Directory>
-    </Fragment>
-
-    <Fragment>
-        <DirectoryRef Id="INSTALLDIR">
-            <Component Id="RegistryEntries" Guid="*">
-                <RegistryKey Root="HKCU" Key="Software\\{{manufacturer}}\\Cứt Truyện">
-                    <RegistryValue Name="InstallDir" Type="string" Value="[INSTALLDIR]" KeyPath="yes" />
-                </RegistryKey>
-                <!-- Change the Root to HKCU for perUser installations -->
-                {{#each deep_link_protocols as |protocol| ~}}
-                <RegistryKey Root="HKLM" Key="Software\Classes\\{{protocol}}">
-                    <RegistryValue Type="string" Name="URL Protocol" Value=""/>
-                    <RegistryValue Type="string" Value="URL:Cứt Truyện protocol"/>
-                    <RegistryKey Key="DefaultIcon">
-                        <RegistryValue Type="string" Value="&quot;[!Path]&quot;,0" />
-                    </RegistryKey>
-                    <RegistryKey Key="shell\open\command">
-                        <RegistryValue Type="string" Value="&quot;[!Path]&quot; &quot;%1&quot;" />
-                    </RegistryKey>
-                </RegistryKey>
-                {{/each~}}
-            </Component>
-        </DirectoryRef>
-    </Fragment>
 </Wix>
