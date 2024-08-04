@@ -55,7 +55,7 @@
 				"type": "downloadBootstrapper"
 			},
 			"wix": {
-				"template": "../shittruyen.wxs"
+				"template": "../bundle_templates/shittruyen.wxs"
 			}
 		},
 		"linux": {
@@ -65,13 +65,13 @@
 			},
 			"deb": {
 				"files": {},
-				"desktopTemplate": "../shittruyen.desktop"
+				"desktopTemplate": "../bundle_templates/shittruyen.desktop"
 			},
 			"rpm": {
 				"epoch": 0,
 				"files": {},
 				"release": "1",
-				"desktopTemplate": "../shittruyen.desktop"
+				"desktopTemplate": "../bundle_templates/shittruyen.desktop"
 			}
 		}
 	},
