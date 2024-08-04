@@ -3,8 +3,8 @@ name = "shittruyen"
 version = "0.0.1"
 description = "ShitTruyen đơn giản là một desktop app đa nền tảng của web Cứt Truyện nhưng nhiều tính năng hơn."
 authors = ["9OwL"]
-license = ""
-repository = ""
+license = "MIT"
+repository = "https://github.com/huyhoangg9owl/shittruyen"
 edition = "2021"
 rust-version = "1.70"
 

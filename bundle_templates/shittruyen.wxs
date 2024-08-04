@@ -26,7 +26,7 @@
 			Languages="0"
 			Compressed="yes"
 			InstallScope="perMachine"
-			SummaryCodepage="65001" />
+			SummaryCodepage="!(loc.TauriCodepage)" />
 
 		<!-- https://docs.microsoft.com/en-us/windows/win32/msi/reinstallmode -->
 		<!-- reinstall all files; rewrite all registry entries; reinstall all shortcuts -->
