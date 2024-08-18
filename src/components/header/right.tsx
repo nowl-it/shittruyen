@@ -1,6 +1,7 @@
 import { Button } from '@/components/ui/button';
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from '@/components/ui/command';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { cn } from '@/lib/utils';
 import useThemeStore from '@/store/theme';
 import { Link } from '@tanstack/react-router';
@@ -8,7 +9,6 @@ import themeSettings from 'global/themes.conf.json';
 import { BellIcon, Check, ChevronsUpDown } from 'lucide-react';
 import { useTheme } from 'next-themes';
 import { useState } from 'react';
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '../ui/tooltip';
 
 const themes = themeSettings.resource.themes;
 

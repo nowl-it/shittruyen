@@ -78,6 +78,9 @@
 				"release": "1",
 				"desktopTemplate": "../bundle_templates/linux/main.desktop"
 			}
+		},
+		"android": {
+			"minSdkVersion": 24
 		}
 	},
 	"plugins": {}

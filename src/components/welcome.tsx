@@ -14,7 +14,12 @@ export default function Welcome() {
 				</p>
 				<span className="text-sm text-gray-400">
 					Đây là dự án mã nguồn mở (
-					<a className="text-sky-500" href="https://github.com/huyhoangg9owl/shittruyen" target="_blank">
+					<a
+						className="text-sky-500"
+						href="https://github.com/huyhoangg9owl/shittruyen"
+						target="_blank"
+						rel="noreferrer"
+					>
 						open source
 					</a>
 					)
@@ -24,7 +29,12 @@ export default function Welcome() {
 					Hiện tại dự án đang trong quá trình phát triển, vui lòng kiên nhẫn chờ đợi.
 					<br />
 					Bạn có thể{' '}
-					<a href="https://www.facebook.com/9owlsama" className="text-sky-400" target="_blank">
+					<a
+						href="https://www.facebook.com/9owlsama"
+						className="text-sky-400"
+						target="_blank"
+						rel="noreferrer"
+					>
 						liên hệ với tôi
 					</a>{' '}
 					để nhận thông báo khi ứng dụng hoàn thiện.

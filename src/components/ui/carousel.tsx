@@ -8,6 +8,7 @@ import {
 	forwardRef,
 	HTMLAttributes,
 	KeyboardEvent,
+	ReactNode,
 	useCallback,
 	useContext,
 	useEffect,
@@ -115,7 +116,7 @@ const Carousel = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement> & Car
 			<CarouselContext.Provider
 				value={{
 					carouselRef,
-					api: api,
+					api,
 					opts,
 					orientation: orientation || (opts?.axis === 'y' ? 'vertical' : 'horizontal'),
 					scrollPrev,
@@ -140,21 +141,42 @@ const Carousel = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement> & Car
 );
 Carousel.displayName = 'Carousel';
 
-interface CarouselContentProps extends HTMLAttributes<HTMLDivElement> {}
+interface CarouselContentProps extends HTMLAttributes<HTMLDivElement> {
+	rows?: number;
+	rowClassName?: string;
+	children: ReactNode[];
+}
 
-const CarouselContent = forwardRef<HTMLDivElement, CarouselContentProps>(({ className, ...props }, ref) => {
-	const { carouselRef, orientation } = useCarousel();
+const CarouselContent = forwardRef<HTMLDivElement, CarouselContentProps>(
+	({ className, rows = 1, rowClassName = '', children, ...props }, ref) => {
+		const { carouselRef, orientation } = useCarousel();
 
-	return (
-		<div ref={carouselRef} className="overflow-hidden">
-			<div
-				ref={ref}
-				className={cn('flex', orientation === 'horizontal' ? '-ml-4' : '-mt-4 flex-col', className)}
-				{...props}
-			/>
-		</div>
-	);
-});
+		return (
+			<div ref={carouselRef} className="overflow-hidden">
+				<div
+					ref={ref}
+					className={cn(
+						'flex will-change-transform',
+						orientation === 'horizontal' ? '-ml-4' : '-mt-4 flex-col',
+						className
+					)}
+					{...props}
+				>
+					{children && rows > 1
+						? [...Array(Math.ceil(children.length / rows)).keys()].map((index) => (
+								<div
+									key={index}
+									className={cn('min-w-0 shrink-0 grow-0 basis-full space-y-4', rowClassName)}
+								>
+									{children.slice(index * rows, (index + 1) * rows)}
+								</div>
+							))
+						: children}
+				</div>
+			</div>
+		);
+	}
+);
 CarouselContent.displayName = 'CarouselContent';
 
 const CarouselItem = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(({ className, ...props }, ref) => {

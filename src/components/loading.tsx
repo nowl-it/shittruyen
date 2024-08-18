@@ -1,15 +1,32 @@
-import { forwardRef, HTMLAttributes } from 'react';
+import { memo } from 'react';
+import { TypewriterEffect } from './ui/typewritter';
 
-export interface LoadingProps extends HTMLAttributes<HTMLDivElement> {
-	asChild?: boolean;
-}
+const words = [
+	{
+		text: 'Chào'
+	},
+	{
+		text: 'mừng'
+	},
+	{
+		text: 'tới'
+	},
+	{
+		text: 'Cứt',
+		className: 'text-acent'
+	},
+	{
+		text: 'Truyện.',
+		className: 'text-acent'
+	}
+];
 
-const Loading = forwardRef<HTMLDivElement, LoadingProps>((props, ref) => {
+const Loading = () => {
 	return (
-		<div className="h-screen w-full content-center text-center" ref={ref} {...props}>
-			<h1 className="text-4xl">Cứt Truyện rác vcl 🐧</h1>
+		<div className="flex h-screen w-full flex-col items-center justify-center">
+			<TypewriterEffect words={words} />
 		</div>
 	);
-});
+};
 
-export default Loading;
+export default memo(Loading);

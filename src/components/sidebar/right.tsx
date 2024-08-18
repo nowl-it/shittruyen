@@ -1,7 +1,7 @@
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { cn } from '@/lib/utils';
 import { Link } from '@tanstack/react-router';
 import { Bookmark, Home, LogIn, Search, Settings, Tag, User } from 'lucide-react';
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '../ui/tooltip';
 
 const iconClasses =
 	'transition-all duration-500 opacity-60 stroke-primary size-6 scale-90 hover:scale-100 hover:opacity-100';

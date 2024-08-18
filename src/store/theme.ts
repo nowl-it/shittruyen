@@ -1,5 +1,6 @@
-import { CookieGet, CookieRemove, CookieSet } from '@/lib/cookie';
+import { ApplyThemes } from '@/lib/themes';
 import ThemeConfiguration from 'global/themes.conf.json';
+import Cookies from 'js-cookie';
 import { create } from 'zustand';
 import { createJSONStorage, persist, StateStorage } from 'zustand/middleware';
 
@@ -18,15 +19,15 @@ export type ThemeAction = {
 
 const CookieStorage: StateStorage = {
 	getItem: (name: string) => {
-		const value = CookieGet(name);
+		const value = Cookies.get(name);
 		const themeLocal = localStorage.getItem('theme');
 		return value ?? themeLocal ?? defaultTheme.value;
 	},
 	setItem: (name: string, value: string) => {
-		CookieSet(name, value);
+		Cookies.set(name, value);
 	},
 	removeItem: (name: string) => {
-		CookieRemove(name);
+		Cookies.remove(name);
 	}
 };
 
@@ -36,7 +37,7 @@ const useThemeStore = create<ThemeState & ThemeAction>()(
 			theme: defaultTheme.value,
 			setTheme: (theme, extraFunction) => {
 				if (extraFunction) extraFunction(theme);
-				CookieSet('theme', theme);
+				Cookies.set('theme', theme);
 				set({ theme });
 			},
 			getTheme: () => {
@@ -44,9 +45,12 @@ const useThemeStore = create<ThemeState & ThemeAction>()(
 				return AllThemes.find((t) => t.value === theme) ?? defaultTheme;
 			},
 			updateThemes: async () => {
-				const res = await fetch('/api/update-themes');
-				const { updated } = await res.json();
-				return updated;
+				try {
+					await ApplyThemes();
+					return true;
+				} catch (error) {
+					return false;
+				}
 			}
 		}),
 		{

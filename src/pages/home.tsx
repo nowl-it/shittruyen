@@ -1,4 +1,5 @@
 import getTags from '@/api/tags';
+import { TopMangaAPI } from '@/api/top';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import {
@@ -10,14 +11,27 @@ import {
 	CarouselPrevious
 } from '@/components/ui/carousel';
 import { HoverCard, HoverCardContent, HoverCardPortal, HoverCardTrigger } from '@/components/ui/hover-card';
+import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { cn } from '@/lib/utils';
 import { NewChapterManga, SpotlightManga } from '@/types/home_a';
 import { useQuery } from '@tanstack/react-query';
 import { Link } from '@tanstack/react-router';
-import Autoplay from 'embla-carousel-autoplay';
+import Autoplay, { AutoplayOptionsType } from 'embla-carousel-autoplay';
+import useEmblaCarousel from 'embla-carousel-react/components/useEmblaCarousel';
 import { Clock } from 'lucide-react';
-import { useEffect, useRef, useState } from 'react';
+import { Dispatch, Fragment, ReactNode, SetStateAction, useEffect, useRef, useState } from 'react';
 import TimeAgo from 'timeago-react';
+
+type UseCarouselParameters = Parameters<typeof useEmblaCarousel>;
+type CarouselOptions = UseCarouselParameters[0];
+
+interface Props {
+	pluginConfig: AutoplayOptionsType;
+	carouselConfig: CarouselOptions;
+	setCurrent?: Dispatch<SetStateAction<number>>;
+	className?: string;
+	children: ReactNode;
+}
 
 export function Genres({ id }: { id: number }) {
 	const {
@@ -45,31 +59,19 @@ export function Genres({ id }: { id: number }) {
 }
 
 export function Spotlight({ data }: { data: SpotlightManga[] }) {
-	const plugin = useRef(Autoplay({ delay: 5000, stopOnInteraction: true }));
-	const [api, setApi] = useState<CarouselApi>();
 	const [current, setCurrent] = useState(0);
 
-	useEffect(() => {
-		if (!api) return;
-
-		setCurrent(api.selectedScrollSnap());
-
-		api.on('select', () => {
-			setCurrent(api.selectedScrollSnap());
-		});
-	}, [api]);
-
 	return (
-		<Carousel
-			plugins={[plugin.current]}
-			className="group/carousel relative w-full"
-			opts={{
+		<CarouselBoilerplate
+			carouselConfig={{
 				loop: true,
 				align: 'center'
 			}}
-			onMouseEnter={plugin.current.stop}
-			onMouseLeave={plugin.current.reset}
-			setApi={setApi}
+			pluginConfig={{
+				delay: 5000,
+				stopOnInteraction: true
+			}}
+			setCurrent={setCurrent}
 		>
 			<CarouselContent className="-ml-1">
 				{data.map((item, index) => (
@@ -99,58 +101,136 @@ export function Spotlight({ data }: { data: SpotlightManga[] }) {
 			</CarouselContent>
 			<CarouselPrevious className="left-6 h-16 opacity-0 transition-all group-hover/carousel:opacity-100" />
 			<CarouselNext className="right-6 h-16 opacity-0 transition-all group-hover/carousel:opacity-100" />
-		</Carousel>
+		</CarouselBoilerplate>
 	);
 }
 
 export function MangaListCard({ data }: { data: NewChapterManga[] }) {
-	const plugin = useRef(Autoplay({ delay: 5000, stopOnInteraction: true }));
-	const [api, setApi] = useState<CarouselApi>();
+	const rows = 2;
 
 	return (
-		<Carousel
-			setApi={setApi}
-			plugins={[plugin.current]}
-			className="group/carousel relative w-full px-4"
-			opts={{
-				loop: true,
+		<CarouselBoilerplate
+			carouselConfig={{
+				loop: false,
 				align: 'start',
 				slidesToScroll: 5
 			}}
-			onMouseEnter={plugin.current.stop}
-			onMouseLeave={plugin.current.reset}
+			pluginConfig={{
+				delay: 5000,
+				stopOnInteraction: true
+			}}
+			className="px-4"
 		>
-			<CarouselContent>
-				{data.map((item, index) => (
-					<CarouselItem
-						onClick={() => api?.scrollTo(index)}
-						className="basis-1/5 opacity-20 transition-opacity duration-300 hover:opacity-100"
-						key={item.id}
-					>
-						<HoverCard>
-							<HoverCardTrigger asChild>
-								<img src={item.cover_url} alt={item.name} className="size-full rounded-lg" />
-							</HoverCardTrigger>
-							<HoverCardPortal container={document.body}>
-								<HoverCardContent side="right">
-									<h1 className="text-lg font-semibold">{item.name}</h1>
-									<p className="text-sm">Chapter {item.newest_chapter_number}</p>
-									<span className="mr-2 text-sm">
-										<Clock size={16} className="mr-1 inline-block" />
-										<TimeAgo datetime={item.newest_chapter_created_at} locale="vi" />
-									</span>
-									<Genres id={item.id} />
-									<Button asChild variant="default" className="mt-2 w-fit">
-										<Link to={`/manga/${item.id}`}>Đọc ngay</Link>
-									</Button>
-								</HoverCardContent>
-							</HoverCardPortal>
-						</HoverCard>
-					</CarouselItem>
-				))}
+			<CarouselContent rows={rows} rowClassName="basis-1/5">
+				{Array.from({
+					length: data.length - (data.length % rows)
+				}).map((_, index) => {
+					const item = data[index];
+					return (
+						<CarouselItem
+							className="opacity-60 transition-opacity duration-300 hover:opacity-100"
+							key={item.id}
+						>
+							<HoverCard>
+								<HoverCardTrigger asChild>
+									<img src={item.cover_url} alt={item.name} className="size-full rounded-lg" />
+								</HoverCardTrigger>
+								<HoverCardPortal container={document.body}>
+									<HoverCardContent side="right">
+										<h1 className="text-lg font-semibold">{item.name}</h1>
+										<p className="text-sm">Chapter {item.newest_chapter_number}</p>
+										<span className="mr-2 text-sm">
+											<Clock size={16} className="mr-1 inline-block" />
+											<TimeAgo datetime={item.newest_chapter_created_at} locale="vi" />
+										</span>
+										<Genres id={item.id} />
+										<Button asChild variant="default" className="mt-2 w-fit">
+											<Link to={`/manga/${item.id}`}>Đọc ngay</Link>
+										</Button>
+									</HoverCardContent>
+								</HoverCardPortal>
+							</HoverCard>
+						</CarouselItem>
+					);
+				})}
 			</CarouselContent>
 			<CarouselPrevious className="left-0 h-16 opacity-0 transition-all group-hover/carousel:opacity-100" />
 			<CarouselNext className="right-0 h-16 opacity-0 transition-all group-hover/carousel:opacity-100" />
+		</CarouselBoilerplate>
+	);
+}
+
+function CarouselBoilerplate({
+	pluginConfig = {},
+	carouselConfig = {},
+	setCurrent = () => {},
+	className = '',
+	children
+}: Props) {
+	const plugin = useRef(Autoplay(pluginConfig));
+	const [api, setApi] = useState<CarouselApi>();
+
+	useEffect(() => {
+		if (!api) return;
+
+		setCurrent(api.selectedScrollSnap());
+
+		api.on('select', () => {
+			setCurrent(api.selectedScrollSnap());
+		});
+	}, [api]);
+
+	return (
+		<Carousel
+			plugins={[plugin.current]}
+			className={cn('group/carousel relative w-full', className)}
+			opts={carouselConfig}
+			onMouseEnter={plugin.current.stop}
+			onMouseLeave={plugin.current.reset}
+			setApi={setApi}
+		>
+			{children}
 		</Carousel>
+	);
+}
+
+export function Top() {
+	const [type, setType] = useState<'week' | 'month' | 'all'>('week');
+
+	const { data: top, isSuccess } = useQuery({
+		queryKey: ['top', type],
+		queryFn: async () =>
+			await TopMangaAPI({
+				duration: type,
+				page: 1,
+				per_page: 5
+			})
+	});
+
+	return (
+		<Fragment>
+			<Tabs
+				defaultValue="week"
+				className="mx-auto w-fit"
+				onValueChange={(value) => setType(value as 'week' | 'month' | 'all')}
+			>
+				<TabsList>
+					<TabsTrigger value="week">Tuần</TabsTrigger>
+					<TabsTrigger value="month">Tháng</TabsTrigger>
+					<TabsTrigger value="all">Tất cả</TabsTrigger>
+				</TabsList>
+			</Tabs>
+			<div className="relative w-full">
+				{isSuccess ? (
+					top.map((item, index) => (
+						<div key={item.id} className="w-32 overflow-hidden rounded-lg">
+							<img src={item.cover_url} alt={item.name} className="w-full" />
+						</div>
+					))
+				) : (
+					<p>Đang tải...</p>
+				)}
+			</div>
+		</Fragment>
 	);
 }

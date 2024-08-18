@@ -1,50 +1,60 @@
 import Header from '@/components/header';
-import Loading from '@/components/loading';
-import NotFound from '@/components/not-found';
 import Sidebar from '@/components/sidebar';
 import Welcome from '@/components/welcome';
-import useLoadingStore from '@/store/loading';
+import { cn } from '@/lib/utils';
 import useSEOStore from '@/store/seo';
-import { createRootRoute, Outlet } from '@tanstack/react-router';
-import { useLayoutEffect } from 'react';
+import { createRootRoute, Outlet, useRouterState } from '@tanstack/react-router';
+import { createContext, useContext, useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { Fragment } from 'react/jsx-runtime';
 
 const isWelcomeDone = localStorage.getItem('welcome');
 
 export const Route = createRootRoute({
 	component: isWelcomeDone ? Root : Welcome,
-	notFoundComponent: NotFound
+	beforeLoad: async () => {
+		await new Promise((resolve) => setTimeout(resolve, 3000));
+	}
+});
+
+export const RootContext = createContext<{
+	className: string;
+	setClassName: (className: string) => void;
+}>({
+	className: '',
+	setClassName: () => {}
 });
 
 function Root() {
-	const { isLoading, setIsLoading } = useLoadingStore();
+	const { status } = useRouterState();
 	const { setState } = useSEOStore();
+	const [className, setClassName] = useState('');
 
-	useLayoutEffect(() => {
-		setIsLoading(true);
-		const _timeout = setTimeout(() => {
-			setIsLoading(false);
-		}, 1000);
-
-		return () => {
-			setIsLoading(false);
-			clearTimeout(_timeout);
-		};
-	}, []);
-
-	if (isLoading) return <Loading />;
+	useEffect(() => {
+		if (status === 'pending') setClassName('');
+	}, [status]);
 
 	return (
-		<Fragment>
+		<RootContext.Provider
+			value={{
+				className,
+				setClassName
+			}}
+		>
 			<Helmet defaultTitle="Trang Chủ" prioritizeSeoTags onChangeClientState={(newState) => setState(newState)} />
 			<Header />
-			<main className="relative min-h-full w-full pl-16">
-				<Sidebar />
-				<article className="min-h-full w-full py-4">
-					<Outlet />
-				</article>
-			</main>
-		</Fragment>
+			<Base />
+		</RootContext.Provider>
+	);
+}
+
+function Base() {
+	const { className } = useContext(RootContext);
+	return (
+		<main className="relative min-h-full w-full pl-16">
+			<Sidebar />
+			<article className={cn('min-h-full w-full py-4', className)}>
+				<Outlet />
+			</article>
+		</main>
 	);
 }

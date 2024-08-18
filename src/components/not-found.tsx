@@ -1,8 +1,10 @@
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card';
 import { cn } from '@/lib/utils';
+import { RootContext } from '@/routes/__root';
 import Info from 'global/info.json';
 import { Mail } from 'lucide-react';
+import { useContext, useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Fragment } from 'react/jsx-runtime';
 
@@ -39,10 +41,16 @@ const chat: Chat[] = [
 ];
 
 export default function NotFound() {
+	const { setClassName } = useContext(RootContext);
+
+	useEffect(() => {
+		setClassName('py-0');
+	}, []);
+
 	return (
 		<Fragment>
-			<Helmet prioritizeSeoTags async title="Trang không tồn tại" />
-			<section className="size-full content-center">
+			<Helmet title="Trang không tồn tại" />
+			<section className="min-h-aside w-full content-center">
 				<div className="text-center">
 					<h1 className="text-9xl font-extrabold text-primary">4O4</h1>
 					<p className="text-2xl font-medium text-primary/80">Trang không tồn tại.</p>

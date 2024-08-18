@@ -17,6 +17,9 @@ const config = {
 				navbar: 'var(--navbar-height)',
 				aside: 'calc(100dvh - var(--navbar-height))'
 			},
+			minHeight: {
+				aside: 'calc(100dvh - var(--navbar-height))'
+			},
 			padding: {
 				navbar: 'var(--navbar-height) 0 0 0'
 			},
@@ -78,16 +81,37 @@ const config = {
 						opacity: '1',
 						transform: 'translate(-50%,-40%) scale(1)'
 					}
+				},
+				text: {
+					'0%, 100%': {
+						'background-size': '200% 200%',
+						'background-position': 'left center'
+					},
+					'50%': {
+						'background-size': '200% 200%',
+						'background-position': 'right center'
+					}
+				},
+				'svg-path': {
+					'0%': { stroke: 'red' },
+					'15%': { stroke: 'orange' },
+					'30%': { stroke: 'yellow' },
+					'45%': { stroke: 'green' },
+					'60%': { stroke: 'blue' },
+					'75%': { stroke: 'purple' },
+					'100%': { stroke: 'red' }
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
 				'accordion-up': 'accordion-up 0.2s ease-out',
-				spotlight: 'spotlight 2s ease .75s 1 forwards'
+				spotlight: 'spotlight 2s ease .75s 1 forwards',
+				text: 'text 5s ease infinite',
+				'svg-path': 'svg-path 7s linear infinite'
 			}
 		}
 	},
-	plugins: [require('tailwindcss-animate')]
+	plugins: [require('tailwindcss-animate'), require('@xpd/tailwind-3dtransforms')]
 } satisfies Config;
 
 export default config;
