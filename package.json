@@ -34,7 +34,7 @@
 		"@types/smoothscroll-polyfill": "^0.3.4",
 		"@types/three": "^0.167.1",
 		"@xpd/tailwind-3dtransforms": "^1.0.3",
-		"axios": "^1.7.2",
+		"axios": "^1.7.4",
 		"axios-tauri-api-adapter": "^0.2.1",
 		"class-variance-authority": "^0.7.0",
 		"clsx": "^2.1.1",
